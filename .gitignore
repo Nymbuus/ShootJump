@@ -1,0 +1,8 @@
+# Build directories
+out/
+
+# Visual Studio
+.vs/
+
+# CMake generated files
+CMakeCache.txt
