@@ -1,3 +1,4 @@
+#pragma once
 #include "raylib.h"
 #include "Platform.h"
 #include "Player.h"
@@ -33,7 +34,7 @@ private:
 	void createPlatforms();
 
 	void checkPlatformCollision(
-		Rectangle playerCollision,
-		Rectangle previousPlayerCollision,
+		Circle playerCollision,
+		Circle previousPlayerCollision,
 		Rectangle platformCollision);
 };

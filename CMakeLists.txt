@@ -28,7 +28,7 @@ FetchContent_MakeAvailable(raylib)
 # --------------------------------------------------
 
 add_executable(ShootJump
-    src/main.cpp "src/Game.cpp" "src/Game.h" "src/Player.cpp" "src/Player.h" "src/Platform.cpp" "src/Platform.h")
+    src/main.cpp "src/Game.cpp" "src/Game.h" "src/Player.cpp" "src/Player.h" "src/Platform.cpp" "src/Platform.h" "src/Circle.h")
 
 # Link Raylib to our program
 target_link_libraries(ShootJump PRIVATE raylib)

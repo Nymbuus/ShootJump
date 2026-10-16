@@ -24,7 +24,7 @@ void Player::update(float deltaTime) {
 }
 
 void Player::draw() {
-	DrawRectangle(position.x, position.y, Width, Height, BLUE);
+	DrawCircle(position.x, position.y, Radius, BLUE);
 }
 
 void Player::reset() {
@@ -66,7 +66,7 @@ void Player::deaccelerate(float deltaTime) {
 }
 
 void Player::hitVertical(float stayPosY) {
-	position.y = stayPosY;
+	position.y = stayPosY; 
 	velocity.y = 0.0f;
 }
 
@@ -75,11 +75,9 @@ void Player::hitWall(float stayPosX) {
 	velocity.x = 0.0f;
 }
 
-Rectangle Player::getCollisionRect() const{
-	return Rectangle(
-		position.x,
-		position.y,
-		Width,
-		Height
+Circle Player::getCollisionRect() const{
+	return Circle(
+		position,
+		Radius
 	);
 }

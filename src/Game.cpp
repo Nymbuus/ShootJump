@@ -9,7 +9,7 @@ Game::Game()
 {
 	InitWindow(InitWindowWidth, InitWindowHeight, "Platformer");
 	SetTargetFPS(InitFPS);
-	ToggleFullscreen();
+	//ToggleFullscreen();
 	createWalls();
 	createPlatforms();
 	run();
@@ -59,11 +59,14 @@ void Game::processInput(float deltaTime) {
 void Game::update(float deltaTime) {
 	jumpReady = false;
 
-	Rectangle previousPlayerCollision = player.getCollisionRect();
+	Circle previousPlayerCollision = player.getCollisionRect();
 
 	player.update(deltaTime);
 
-	Rectangle playerCollision = player.getCollisionRect();
+	Circle playerCollision = player.getCollisionRect();
+
+	std::cout << "playerPosX: " << previousPlayerCollision.center.x << "  posY: " << previousPlayerCollision.center.y <<
+		"  lowerplatfomrY: " << platforms.at(1).getCollisionRect().y << std::endl;
 
 	// Checks collision between player and all platforms.
 	if (!platforms.empty())
@@ -107,20 +110,20 @@ void Game::createPlatforms() {
 }
 
 void Game::checkPlatformCollision(
-	Rectangle playerCollision,
-	Rectangle previousPlayerCollision,
+	Circle playerCollision,
+	Circle previousPlayerCollision,
 	Rectangle platformCollision) {
-	if (CheckCollisionRecs(playerCollision, platformCollision))
+	if (CheckCollisionCircleRec(playerCollision.center, playerCollision.radius, platformCollision))
 	{
-		float previousLeft = previousPlayerCollision.x;
-		float previousRight = previousLeft + previousPlayerCollision.width;
-		float previousTop = previousPlayerCollision.y;
-		float previousBottom = previousTop + previousPlayerCollision.height;
+		float previousLeft = previousPlayerCollision.center.x - previousPlayerCollision.radius;
+		float previousRight = previousPlayerCollision.center.x + previousPlayerCollision.radius;
+		float previousTop = previousPlayerCollision.center.y - previousPlayerCollision.radius;
+		float previousBottom = previousPlayerCollision.center.y + previousPlayerCollision.radius;
 
-		float playerLeft = playerCollision.x;
-		float playerRight = playerLeft + playerCollision.width;
-		float playerTop = playerCollision.y;
-		float playerBottom = playerTop + playerCollision.height;
+		float playerLeft = playerCollision.center.x - playerCollision.radius;
+		float playerRight = playerCollision.center.x + playerCollision.radius;
+		float playerTop = playerCollision.center.y - playerCollision.radius;
+		float playerBottom = playerCollision.center.y + playerCollision.radius;
 
 		float platformLeft = platformCollision.x;
 		float platformRight = platformLeft + platformCollision.width;
@@ -130,23 +133,23 @@ void Game::checkPlatformCollision(
 		// Land on top of the platform
 		if (previousBottom <= platformTop && playerBottom >= platformTop)
 		{
-			player.hitVertical(platformTop - playerCollision.height);
+			player.hitVertical(platformTop - playerCollision.radius);
 			jumpReady = true;
 		}
 		// Hit the underside of the platform
 		else if (previousTop >= platformBottom && playerTop <= platformBottom)
 		{
-			player.hitVertical(platformBottom);
+			player.hitVertical(platformBottom + playerCollision.radius);
 		}
 		// Hit the left side of the platform
 		else if (previousRight <= platformLeft && playerRight >= platformLeft)
 		{
-			player.hitWall(platformLeft - playerCollision.width);
+			player.hitWall(platformLeft - playerCollision.radius);
 		}
 		// Hit the right side of the platform
 		else if (previousLeft >= platformRight && playerLeft <= platformRight)
 		{
-			player.hitWall(platformRight);
+			player.hitWall(platformRight + playerCollision.radius);
 		}
 	}
 }

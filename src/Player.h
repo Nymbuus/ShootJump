@@ -1,4 +1,6 @@
+#pragma once
 #include "raylib.h"
+#include "Circle.h"
 
 enum class Direction
 {
@@ -22,7 +24,7 @@ public:
 	void hitVertical(float stayPosY);
 	void hitWall(float StayPosX);
 
-	Rectangle getCollisionRect() const;
+	Circle getCollisionRect() const;
 
 private:
 	Vector2 position;
@@ -33,7 +35,6 @@ private:
 	static constexpr float JumpStrength = -1000.0f;
 	static constexpr float HorizontalAcceleration = 3300.0f;
 	static constexpr float MaxVelocityX = 500.0f;
-	static constexpr float Width = 25.0f;
-	static constexpr float Height = 50.0f;
+	static constexpr float Radius = 25.0f;
 	static constexpr float Gravity = 2800.0f;
 };
