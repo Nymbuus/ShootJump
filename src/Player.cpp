@@ -1,15 +1,16 @@
 #include "Player.h"
-#include <iostream>
 
 Player::Player(int windowWidth, int windowheight)
-	: position{windowWidth/19.2f, windowheight/10.8f},
-	  velocity{InitVel}
+	: centerPosition{windowWidth/19.2f, windowheight/10.8f},
+	  velocity{InitVel},
+	  width{Radius*2},
+	  height{Radius*2}
 {
 }
 
 void Player::update(float deltaTime) {
 	velocity.y += Gravity * deltaTime;
-	position.y += velocity.y * deltaTime;
+	centerPosition.y += velocity.y * deltaTime;
 
 	if (velocity.x > MaxVelocityX)
 	{
@@ -20,15 +21,15 @@ void Player::update(float deltaTime) {
 		velocity.x = -MaxVelocityX;
 	}
 
-	position.x += velocity.x * deltaTime;
+	centerPosition.x += velocity.x * deltaTime;
 }
 
 void Player::draw() {
-	DrawCircle(position.x, position.y, Radius, BLUE);
+	DrawCircle(centerPosition.x, centerPosition.y, Radius, BLUE);
 }
 
 void Player::reset() {
-	position = InitPos;
+	centerPosition = InitPos;
 	velocity = InitVel;
 }
 
@@ -66,18 +67,20 @@ void Player::deaccelerate(float deltaTime) {
 }
 
 void Player::hitVertical(float stayPosY) {
-	position.y = stayPosY; 
+	centerPosition.y = stayPosY + Radius; 
 	velocity.y = 0.0f;
 }
 
 void Player::hitWall(float stayPosX) {
-	position.x = stayPosX;
+	centerPosition.x = stayPosX + Radius;
 	velocity.x = 0.0f;
 }
 
-Circle Player::getCollisionRect() const{
-	return Circle(
-		position,
-		Radius
+Rectangle Player::getCollisionRect() const{
+	return Rectangle(
+		centerPosition.x - Radius,
+		centerPosition.y - Radius,
+		width,
+		height
 	);
 }

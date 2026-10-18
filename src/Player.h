@@ -2,12 +2,6 @@
 #include "raylib.h"
 #include "Circle.h"
 
-enum class Direction
-{
-	West,
-	East
-};
-
 class Player
 {
 public:
@@ -24,11 +18,13 @@ public:
 	void hitVertical(float stayPosY);
 	void hitWall(float StayPosX);
 
-	Circle getCollisionRect() const;
+	Rectangle getCollisionRect() const;
 
 private:
-	Vector2 position;
+	Vector2 centerPosition;
 	Vector2 velocity;
+	float width;
+	float height;
 
 	static constexpr Vector2 InitVel = { 0.0f, 0.0f };
 	static constexpr Vector2 InitPos = { 100.0f, 480.0f };

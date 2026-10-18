@@ -34,7 +34,7 @@ private:
 	void createPlatforms();
 
 	void checkPlatformCollision(
-		Circle playerCollision,
-		Circle previousPlayerCollision,
+		Rectangle playerCollision,
+		Rectangle previousPlayerCollision,
 		Rectangle platformCollision);
 };
