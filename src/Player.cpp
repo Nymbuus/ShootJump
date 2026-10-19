@@ -1,10 +1,11 @@
 #include "Player.h"
 
-Player::Player(int windowWidth, int windowheight)
-	: centerPosition{windowWidth/19.2f, windowheight/10.8f},
+Player::Player(int windowWidth, int windowHeight)
+	: centerPosition{windowWidth/19.2f, windowHeight/10.8f},
 	  velocity{InitVel},
 	  width{Radius*2},
-	  height{Radius*2}
+	  height{Radius*2},
+	  gun{centerPosition, Radius}
 {
 }
 
@@ -22,10 +23,12 @@ void Player::update(float deltaTime) {
 	}
 
 	centerPosition.x += velocity.x * deltaTime;
+	gun.update(centerPosition, Radius);
 }
 
 void Player::draw() {
 	DrawCircle(centerPosition.x, centerPosition.y, Radius, BLUE);
+	gun.draw(centerPosition, Radius);
 }
 
 void Player::reset() {

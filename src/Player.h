@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "Circle.h"
+#include "Gun.h"
 
 class Player
 {
@@ -21,6 +21,8 @@ public:
 	Rectangle getCollisionRect() const;
 
 private:
+	Gun gun;
+
 	Vector2 centerPosition;
 	Vector2 velocity;
 	float width;

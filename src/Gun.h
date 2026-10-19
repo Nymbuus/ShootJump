@@ -4,17 +4,17 @@
 class Gun
 {
 public:
-	Gun(Vector2 initPostion);
+	Gun(Vector2 playerCenterPosition, float playerRadius);
 
-	void update();
-	void draw();
+	void update(Vector2 playerCenterPosition, float playerRadius);
+	void draw(Vector2 playerCenterPosition, float playerRadius);
 	void reset();
 
 private:
-	Vector2 postion;
+	Vector2 position;
 	float rotation;
 
 	static constexpr float InitRotation = 0.0f;
-	static constexpr float Width = 10.0f;
-	static constexpr float Height = 15.0f;
+	static constexpr float Width = 15.0f;
+	static constexpr float Height = 10.0f;
 };
