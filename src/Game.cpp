@@ -36,6 +36,11 @@ void Game::processInput(float deltaTime) {
 		player.jump();
 	}
 
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
+		player.fireGun();
+	}
+
 	if (IsKeyPressed(KEY_T))
 	{
 		ToggleFullscreen();
@@ -106,6 +111,8 @@ void Game::createPlatforms() {
 	platforms.emplace_back(platform2);
 	Platform platform3({ 770.0f, windowHeight - 140.0f }, 100.0f, 50.0f, RED);
 	platforms.emplace_back(platform3);
+	Platform platform4({ 40.0f, windowHeight - 440.0f }, 100.0f, 50.0f, RED);
+	platforms.emplace_back(platform4);
 }
 
 void Game::checkPlatformCollision(

@@ -23,7 +23,7 @@ void Player::update(float deltaTime) {
 	}
 
 	centerPosition.x += velocity.x * deltaTime;
-	gun.update(centerPosition, Radius);
+	gun.update(centerPosition, Radius, deltaTime);
 }
 
 void Player::draw() {
@@ -86,4 +86,9 @@ Rectangle Player::getCollisionRect() const{
 		width,
 		height
 	);
+}
+
+void Player::fireGun()
+{
+	gun.fireBullet();
 }

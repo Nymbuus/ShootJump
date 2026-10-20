@@ -17,6 +17,7 @@ public:
 	void deaccelerate(float deltaTime);
 	void hitVertical(float stayPosY);
 	void hitWall(float StayPosX);
+	void fireGun();
 
 	Rectangle getCollisionRect() const;
 

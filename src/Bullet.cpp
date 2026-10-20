@@ -1,19 +1,25 @@
 #include "Bullet.h"
+#include <algorithm>
+#include <numbers>
+#include <iostream>
 
-Bullet::Bullet(Vector2 gunFrontPos, float gunRotation)
+Bullet::Bullet(Vector2 gunFrontPos, float gunRotation, float xDelta, float yDelta)
 	: position{gunFrontPos},
-	  rotation{gunRotation}
+	  angle{gunRotation}
 {
+	float xPercentage = sinf(angle * (std::numbers::pi_v<float> / 180.0f));
+	float yPercentage = cosf(angle * (std::numbers::pi_v<float> / 180.0f));
+	xVelocity = MaxVelocity * xPercentage;
+	yVelocity = MaxVelocity * yPercentage;
 }
 
 void Bullet::update(float deltaTime)
 {
-	position.x += Velocity * deltaTime;
-	position.y += Velocity * deltaTime;
+	position.x += xVelocity * deltaTime;
+	position.y += yVelocity * deltaTime;
 }
 
 void Bullet::draw()
 {
-	Rectangle bulletrec = { position.x, position.y, Width, Height };
-	DrawRectanglePro(bulletrec, position, rotation, YELLOW);
+	DrawCircle(position.x, position.y, Radius, PURPLE);
 }

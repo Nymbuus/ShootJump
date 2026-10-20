@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Platform.h"
 #include "Player.h"
+#include "Gun.h"
 #include <vector>
 
 class Game

@@ -4,7 +4,7 @@
 class Bullet
 {
 public:
-	Bullet(Vector2 gunFrontPos, float gunRotation);
+	Bullet(Vector2 gunFrontPos, float gunRotation, float xDelta, float yDelta);
 
 	void update(float deltaTime);
 	void draw();
@@ -12,9 +12,10 @@ public:
 
 private:
 	Vector2 position;
-	float rotation;
+	float angle;
+	float xVelocity;
+	float yVelocity;
 
-	static constexpr float Velocity = 500.0f;
-	static constexpr float Width = 10.0f;
-	static constexpr float Height = 5.0f;
+	static constexpr float MaxVelocity = 500.0f;
+	static constexpr float Radius = 8.0f;
 };
