@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "Bullet.h"
 
 class Gun
 {
@@ -9,6 +10,8 @@ public:
 	void update(Vector2 playerCenterPosition, float playerRadius);
 	void draw(Vector2 playerCenterPosition, float playerRadius);
 	void reset();
+
+	void fireBullet();
 
 private:
 	Vector2 position;

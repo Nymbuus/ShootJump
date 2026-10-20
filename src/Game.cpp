@@ -9,7 +9,7 @@ Game::Game()
 {
 	InitWindow(InitWindowWidth, InitWindowHeight, "Platformer");
 	SetTargetFPS(InitFPS);
-	//ToggleFullscreen();
+	ToggleFullscreen();
 	createWalls();
 	createPlatforms();
 	run();
