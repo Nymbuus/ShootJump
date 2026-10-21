@@ -3,7 +3,7 @@
 #include <numbers>
 #include <iostream>
 
-Bullet::Bullet(Vector2 gunFrontMidPos, Vector2 coordinatePercentage, float gunRotation, float playerRadius)
+Bullet::Bullet(Vector2 gunFrontMidPos, Vector2 coordinatePercentage)
 	: position{gunFrontMidPos}
 {
 	velocity.x = MaxVelocity * coordinatePercentage.x;

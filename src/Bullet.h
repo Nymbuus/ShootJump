@@ -4,7 +4,7 @@
 class Bullet
 {
 public:
-	Bullet(Vector2 gunFrontMidPos, Vector2 coordinatePercentage, float gunRotation, float playerRadius);
+	Bullet(Vector2 gunFrontMidPos, Vector2 coordinatePercentage);
 
 	void update(float deltaTime);
 	void draw();
