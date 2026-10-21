@@ -12,7 +12,7 @@ public:
 	void draw(Vector2 playerCenterPosition, float playerRadius);
 	void reset();
 
-	void fireBullet();
+	void fireBullet(Vector2 playerCenterPosition);
 
 private:
 	Vector2 position;
@@ -21,6 +21,7 @@ private:
 
 	float deltaX;
 	float deltaY;
+	float playerRadius;
 
 	static constexpr float InitRotation = 0.0f;
 	static constexpr float Width = 15.0f;

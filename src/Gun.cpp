@@ -4,6 +4,7 @@
 
 Gun::Gun(Vector2 playerCenterPosition, float playerRadius)
 	: position{ playerCenterPosition.x + playerRadius - Width, playerCenterPosition.y - (Height / 2) },
+	  playerRadius{playerRadius},
 	  rotation{InitRotation},
 	  deltaX{0.0f},
 	  deltaY{0.0f}
@@ -43,8 +44,17 @@ void Gun::draw(Vector2 playerCenterPosition, float playerRadius)
 	}
 }
 
-void Gun::fireBullet()
+void Gun::fireBullet(Vector2 playerCenterPosition)
 {
-	Bullet bullet({ position.x + Width, position.y + (Height / 2.0f)}, rotation, deltaX, deltaY);
+	Vector2 coordinatePercentage = { 0.0f, 0.0f };
+	coordinatePercentage.x = cosf(rotation * (std::numbers::pi_v<float> / 180.0f));
+	coordinatePercentage.y = sinf(rotation * (std::numbers::pi_v<float> / 180.0f));
+
+	Vector2 gunFrontMidPos = {0.0f, 0.0f};
+
+	gunFrontMidPos.x = playerCenterPosition.x + playerRadius * coordinatePercentage.x;
+	gunFrontMidPos.y = playerCenterPosition.y + playerRadius * coordinatePercentage.y;
+
+	Bullet bullet(gunFrontMidPos, coordinatePercentage, rotation, playerRadius);
 	bullets.emplace_back(bullet);
 }

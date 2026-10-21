@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player(int windowWidth, int windowHeight)
-	: centerPosition{windowWidth/19.2f, windowHeight/10.8f},
+	: centerPosition{windowWidth / 19.2f, windowHeight / 10.8f},
 	  velocity{InitVel},
 	  width{Radius*2},
 	  height{Radius*2},
@@ -90,5 +90,5 @@ Rectangle Player::getCollisionRect() const{
 
 void Player::fireGun()
 {
-	gun.fireBullet();
+	gun.fireBullet(centerPosition);
 }

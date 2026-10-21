@@ -22,12 +22,11 @@ public:
 	Rectangle getCollisionRect() const;
 
 private:
-	Gun gun;
-
 	Vector2 centerPosition;
 	Vector2 velocity;
 	float width;
 	float height;
+	Gun gun;
 
 	static constexpr Vector2 InitVel = { 0.0f, 0.0f };
 	static constexpr Vector2 InitPos = { 100.0f, 480.0f };

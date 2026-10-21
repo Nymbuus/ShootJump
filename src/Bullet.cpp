@@ -3,20 +3,17 @@
 #include <numbers>
 #include <iostream>
 
-Bullet::Bullet(Vector2 gunFrontPos, float gunRotation, float xDelta, float yDelta)
-	: position{gunFrontPos},
-	  angle{gunRotation}
+Bullet::Bullet(Vector2 gunFrontMidPos, Vector2 coordinatePercentage, float gunRotation, float playerRadius)
+	: position{gunFrontMidPos}
 {
-	float xPercentage = sinf(angle * (std::numbers::pi_v<float> / 180.0f));
-	float yPercentage = cosf(angle * (std::numbers::pi_v<float> / 180.0f));
-	xVelocity = MaxVelocity * xPercentage;
-	yVelocity = MaxVelocity * yPercentage;
+	velocity.x = MaxVelocity * coordinatePercentage.x;
+	velocity.y = MaxVelocity * coordinatePercentage.y;
 }
 
 void Bullet::update(float deltaTime)
 {
-	position.x += xVelocity * deltaTime;
-	position.y += yVelocity * deltaTime;
+	position.x += velocity.x * deltaTime;
+	position.y += velocity.y * deltaTime;
 }
 
 void Bullet::draw()
