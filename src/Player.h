@@ -20,6 +20,7 @@ public:
 	void fireGun();
 
 	Rectangle getCollisionRect() const;
+	Gun& getPlayerGun();
 
 private:
 	Vector2 centerPosition;
@@ -31,6 +32,7 @@ private:
 	static constexpr Vector2 InitVel = { 0.0f, 0.0f };
 	static constexpr Vector2 InitPos = { 100.0f, 480.0f };
 	static constexpr float JumpStrength = -1000.0f;
+	static constexpr float RecoilStrength = -1000.0f;
 	static constexpr float HorizontalAcceleration = 3300.0f;
 	static constexpr float MaxVelocityX = 500.0f;
 	static constexpr float Radius = 25.0f;

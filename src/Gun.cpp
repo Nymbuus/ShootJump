@@ -44,7 +44,7 @@ void Gun::draw(Vector2 playerCenterPosition, float playerRadius)
 	}
 }
 
-void Gun::fireBullet(Vector2 playerCenterPosition)
+Vector2 Gun::fireBullet(Vector2 playerCenterPosition)
 {
 	Vector2 coordinatePercentage = { 0.0f, 0.0f };
 	coordinatePercentage.x = cosf(rotation * (std::numbers::pi_v<float> / 180.0f));
@@ -55,6 +55,23 @@ void Gun::fireBullet(Vector2 playerCenterPosition)
 	gunFrontMidPos.x = playerCenterPosition.x + playerRadius * coordinatePercentage.x;
 	gunFrontMidPos.y = playerCenterPosition.y + playerRadius * coordinatePercentage.y;
 
-	Bullet bullet(gunFrontMidPos, coordinatePercentage, rotation, playerRadius);
+	Bullet bullet(gunFrontMidPos, coordinatePercentage);
 	bullets.emplace_back(bullet);
+
+	return coordinatePercentage;
+}
+
+std::vector<Bullet>& Gun::getBullets()
+{
+	return bullets;
+}
+
+void Gun::deleteBullet()
+{
+	bullets.erase(bullets.begin());
+}
+
+float Gun::getRotation()
+{
+	return rotation;
 }

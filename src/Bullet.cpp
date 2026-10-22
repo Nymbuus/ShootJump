@@ -20,3 +20,11 @@ void Bullet::draw()
 {
 	DrawCircle(position.x, position.y, Radius, PURPLE);
 }
+
+Circle Bullet::getCollisionCircle()
+{
+	return Circle(
+		position,
+		Radius
+	);
+}

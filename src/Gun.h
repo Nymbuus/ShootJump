@@ -10,9 +10,11 @@ public:
 
 	void update(Vector2 playerCenterPosition, float playerRadius, float delatTime);
 	void draw(Vector2 playerCenterPosition, float playerRadius);
-	void reset();
 
-	void fireBullet(Vector2 playerCenterPosition);
+	Vector2 fireBullet(Vector2 playerCenterPosition);
+	std::vector<Bullet>& getBullets();
+	void deleteBullet();
+	float getRotation();
 
 private:
 	Vector2 position;

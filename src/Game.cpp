@@ -70,13 +70,28 @@ void Game::update(float deltaTime) {
 
 	Rectangle playerCollision = player.getCollisionRect();
 
-	// Checks collision between player and all platforms.
+	// Checks collision between player and bullets towards all platforms.
 	if (!platforms.empty())
 	{
 		for (int i = 0; i < platforms.size(); i++)
 		{
+			// Checks player and platforms
 			Rectangle platformCollision = platforms.at(i).getCollisionRect();
 			checkPlatformCollision(playerCollision, previousPlayerCollision, platformCollision);
+
+			// Checks bullets and platforms
+			std::vector<Bullet>& bullets = player.getPlayerGun().getBullets();
+			if (!bullets.empty())
+			{
+				for (int j = 0; j < bullets.size(); j++)
+				{
+					Circle bulletColl = player.getPlayerGun().getBullets().at(j).getCollisionCircle();
+					if (CheckCollisionCircleRec(bulletColl.center, bulletColl.radius, platformCollision))
+					{
+						bullets.erase(bullets.begin() + j);
+					}
+				}
+			}
 		}
 	}
 }

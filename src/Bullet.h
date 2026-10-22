@@ -1,5 +1,7 @@
 #pragma once
 #include "raylib.h"
+#include "Circle.h"
+#include <vector>
 
 class Bullet
 {
@@ -8,12 +10,13 @@ public:
 
 	void update(float deltaTime);
 	void draw();
-	void reset();
+
+	Circle getCollisionCircle();
 
 private:
 	Vector2 position;
 	Vector2 velocity;
 
-	static constexpr float MaxVelocity = 500.0f;
+	static constexpr float MaxVelocity = 90.0f;
 	static constexpr float Radius = 8.0f;
 };

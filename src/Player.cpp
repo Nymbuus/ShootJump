@@ -90,5 +90,13 @@ Rectangle Player::getCollisionRect() const{
 
 void Player::fireGun()
 {
-	gun.fireBullet(centerPosition);
+	Vector2 gunRotationCoordinates = gun.fireBullet(centerPosition);
+
+	velocity.x = gunRotationCoordinates.x * RecoilStrength;
+	velocity.y = gunRotationCoordinates.y * RecoilStrength;
+}
+
+Gun& Player::getPlayerGun()
+{
+	return gun;
 }
