@@ -31,7 +31,7 @@ void Game::run() {
 
 // Process all inputs and acts accordingly.
 void Game::processInput(float deltaTime) {
-	if (IsKeyPressed(KEY_SPACE) && jumpReady)
+	if (IsKeyPressed(KEY_SPACE) && touchingGround)
 	{
 		player.jump();
 	}
@@ -48,21 +48,21 @@ void Game::processInput(float deltaTime) {
 
 	if (IsKeyDown(KEY_D))
 	{
-		player.moveRight(deltaTime);
+		player.moveRight(deltaTime, touchingGround);
 	}
 	else if (IsKeyDown(KEY_A))
 	{
-		player.moveLeft(deltaTime);
+		player.moveLeft(deltaTime, touchingGround);
 	}
 	else
 	{
-		player.deaccelerate(deltaTime);
+		player.deaccelerate(deltaTime, touchingGround);
 	}
 }
 
 // Updates everything that needs to be checked every frame.
 void Game::update(float deltaTime) {
-	jumpReady = false;
+	touchingGround = false;
 
 	Rectangle previousPlayerCollision = player.getCollisionRect();
 
@@ -155,7 +155,7 @@ void Game::checkPlatformCollision(
 		if (previousBottom <= platformTop && playerBottom >= platformTop)
 		{
 			player.hitVertical(platformTop - playerCollision.height);
-			jumpReady = true;
+			touchingGround = true;
 		}
 		// Hit the underside of the platform
 		else if (previousTop >= platformBottom && playerTop <= platformBottom)

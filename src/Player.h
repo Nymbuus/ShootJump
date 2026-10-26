@@ -12,9 +12,9 @@ public:
 	void reset();
 
 	void jump();
-	void moveRight(float deltaTime);
-	void moveLeft(float deltaTime);
-	void deaccelerate(float deltaTime);
+	void moveRight(float deltaTime, bool touchingGround);
+	void moveLeft(float deltaTime, bool touchingGround);
+	void deaccelerate(float deltaTime, bool touchingGround);
 	void hitVertical(float stayPosY);
 	void hitWall(float StayPosX);
 	void fireGun();
@@ -33,7 +33,8 @@ private:
 	static constexpr Vector2 InitPos = { 100.0f, 480.0f };
 	static constexpr float JumpStrength = -1000.0f;
 	static constexpr float RecoilStrength = -1000.0f;
-	static constexpr float HorizontalAcceleration = 3300.0f;
+	static constexpr float GroundXAcceleration = 3300.0f;
+	static constexpr float AirXAcceleration = 1000.0f;
 	static constexpr float MaxVelocityX = 500.0f;
 	static constexpr float Radius = 25.0f;
 	static constexpr float Gravity = 2800.0f;

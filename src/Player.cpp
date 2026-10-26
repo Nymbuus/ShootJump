@@ -40,19 +40,29 @@ void Player::jump() {
 	velocity.y = JumpStrength;
 }
 
-void Player::moveRight(float deltaTime) {
-	velocity.x += HorizontalAcceleration * deltaTime;
+void Player::moveRight(float deltaTime, bool touchingGround) {
+	if (touchingGround)
+		velocity.x += GroundXAcceleration * deltaTime;
+	else
+		velocity.x += AirXAcceleration * deltaTime;
 }
 
-void Player::moveLeft(float deltaTime) {
-	velocity.x -= HorizontalAcceleration * deltaTime;
+void Player::moveLeft(float deltaTime, bool touchingGround) {
+	if (touchingGround)
+		velocity.x -= GroundXAcceleration * deltaTime;
+	else
+		velocity.x -= AirXAcceleration * deltaTime;
 }
 
-void Player::deaccelerate(float deltaTime) {
+void Player::deaccelerate(float deltaTime, bool touchingGround) {
 	//Deaccelerates positive velocity.
 	if (velocity.x > 0.0f)
 	{
-		velocity.x -= HorizontalAcceleration * deltaTime;
+		if (touchingGround)
+			velocity.x -= GroundXAcceleration * deltaTime;
+		else
+			velocity.x -= AirXAcceleration * deltaTime;
+
 		if (velocity.x < 0.0f)
 		{
 			velocity.x = 0.0f;
@@ -61,7 +71,11 @@ void Player::deaccelerate(float deltaTime) {
 	//Deaccelerates negative velocity.
 	if (velocity.x < 0.0f)
 	{
-		velocity.x += HorizontalAcceleration * deltaTime;
+		if (touchingGround)
+			velocity.x += GroundXAcceleration * deltaTime;
+		else
+			velocity.x += AirXAcceleration * deltaTime;
+
 		if (velocity.x > 0.0f)
 		{
 			velocity.x = 0.0f;

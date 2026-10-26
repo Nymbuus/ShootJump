@@ -24,7 +24,7 @@ private:
 	int windowHeight;
 
 	std::vector<Platform> platforms;
-	bool jumpReady = false;
+	bool touchingGround = false;
 	float CollisionOffset = 5.0f;
 
 	void processInput(float deltaTime);
