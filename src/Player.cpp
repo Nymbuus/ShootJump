@@ -59,9 +59,9 @@ void Player::deaccelerate(float deltaTime, bool touchingGround) {
 	if (velocity.x > 0.0f)
 	{
 		if (touchingGround)
-			velocity.x -= GroundXAcceleration * deltaTime;
+			velocity.x -= GroundXDeacceleration * deltaTime;
 		else
-			velocity.x -= AirXAcceleration * deltaTime;
+			velocity.x -= AirXDeacceleration * deltaTime;
 
 		if (velocity.x < 0.0f)
 		{
@@ -72,9 +72,9 @@ void Player::deaccelerate(float deltaTime, bool touchingGround) {
 	if (velocity.x < 0.0f)
 	{
 		if (touchingGround)
-			velocity.x += GroundXAcceleration * deltaTime;
+			velocity.x += GroundXDeacceleration * deltaTime;
 		else
-			velocity.x += AirXAcceleration * deltaTime;
+			velocity.x += AirXDeacceleration * deltaTime;
 
 		if (velocity.x > 0.0f)
 		{
