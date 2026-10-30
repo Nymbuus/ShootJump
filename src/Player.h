@@ -7,7 +7,7 @@ class Player
 public:
 	Player(int windowWidth, int windowHeight);
 
-	void update(float deltaTime);
+	void update(float deltaTime, Vector2 mouseWorldPos);
 	void draw();
 	void reset();
 
@@ -19,6 +19,7 @@ public:
 	void hitWall(float StayPosX);
 	void fireGun();
 
+	Vector2 getCenterPos() const;
 	Rectangle getCollisionRect() const;
 	Gun& getPlayerGun();
 
@@ -36,7 +37,7 @@ private:
 
 	static constexpr float GroundXAcceleration = 3300.0f;
 	static constexpr float GroundXDeacceleration = 2000.0f;
-	static constexpr float AirXAcceleration = 1400.0f;
+	static constexpr float AirXAcceleration = 1800.0f;
 	static constexpr float AirXDeacceleration = 500.0f;
 
 	static constexpr float MaxVelocityX = 500.0f;

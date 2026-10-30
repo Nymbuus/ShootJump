@@ -8,6 +8,12 @@ Game::Game()
 	  windowHeight{InitWindowHeight}
 {
 	InitWindow(InitWindowWidth, InitWindowHeight, "Platformer");
+
+	camera.target = player.getCenterPos();
+	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+	camera.rotation = 0.0f;
+	camera.zoom = 1.5f;
+
 	SetTargetFPS(InitFPS);
 	ToggleFullscreen();
 	createWalls();
@@ -64,9 +70,13 @@ void Game::processInput(float deltaTime) {
 void Game::update(float deltaTime) {
 	touchingGround = false;
 
+	camera.target = player.getCenterPos();
+	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+
 	Rectangle previousPlayerCollision = player.getCollisionRect();
 
-	player.update(deltaTime);
+	Vector2 mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), camera);
+	player.update(deltaTime, mouseWorldPos);
 
 	Rectangle playerCollision = player.getCollisionRect();
 
@@ -101,12 +111,16 @@ void Game::draw() {
 	ClearBackground(RAYWHITE);
 	DrawText("Platformer", 300, 10, 30, BLACK);
 
+	BeginMode2D(camera);
+
 	player.draw();
 	if(!platforms.empty())
 	{
 		for (int i = 0; i < platforms.size(); i++)
 			platforms.at(i).draw();
 	}
+
+	EndMode2D();
 	EndDrawing();
 }
 

@@ -11,14 +11,13 @@ Gun::Gun(Vector2 playerCenterPosition, float playerRadius)
 {
 }
 
-void Gun::update(Vector2 playerCenterPosition, float playerRadius, float deltaTime)
+void Gun::update(Vector2 playerCenterPosition, float playerRadius, float deltaTime, Vector2 mouseWorldPos)
 {
 	position = { playerCenterPosition.x + playerRadius - Width, playerCenterPosition.y - (Height / 2) };
 
 	// Update the rotation of the gun.
-	Vector2 mousePos = GetMousePosition();
-	deltaX = mousePos.x - playerCenterPosition.x;
-	deltaY = mousePos.y - playerCenterPosition.y;
+	deltaX = mouseWorldPos.x - playerCenterPosition.x;
+	deltaY = mouseWorldPos.y - playerCenterPosition.y;
 	rotation = atan2f(deltaY, deltaX) * (180.0f / std::numbers::pi_v<float>);
 
 	if (!bullets.empty())

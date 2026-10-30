@@ -9,7 +9,7 @@ Player::Player(int windowWidth, int windowHeight)
 {
 }
 
-void Player::update(float deltaTime) {
+void Player::update(float deltaTime, Vector2 mouseWorldPos) {
 	velocity.y += Gravity * deltaTime;
 	centerPosition.y += velocity.y * deltaTime;
 
@@ -23,7 +23,7 @@ void Player::update(float deltaTime) {
 	}
 
 	centerPosition.x += velocity.x * deltaTime;
-	gun.update(centerPosition, Radius, deltaTime);
+	gun.update(centerPosition, Radius, deltaTime, mouseWorldPos);
 }
 
 void Player::draw() {
@@ -91,6 +91,10 @@ void Player::hitVertical(float stayPosY) {
 void Player::hitWall(float stayPosX) {
 	centerPosition.x = stayPosX + Radius;
 	velocity.x = 0.0f;
+}
+
+Vector2 Player::getCenterPos() const {
+	return centerPosition;
 }
 
 Rectangle Player::getCollisionRect() const{

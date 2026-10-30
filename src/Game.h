@@ -14,6 +14,7 @@ public:
 
 private:
 	Player player;
+	Camera2D camera{};
 
 	static constexpr int InitWindowWidth = 1920;
 	static constexpr int InitWindowHeight = 1080;

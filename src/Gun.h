@@ -8,7 +8,7 @@ class Gun
 public:
 	Gun(Vector2 playerCenterPosition, float playerRadius);
 
-	void update(Vector2 playerCenterPosition, float playerRadius, float delatTime);
+	void update(Vector2 playerCenterPosition, float playerRadius, float delatTime, Vector2 mouseWorldPos);
 	void draw(Vector2 playerCenterPosition, float playerRadius);
 
 	Vector2 fireBullet(Vector2 playerCenterPosition);
