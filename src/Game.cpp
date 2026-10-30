@@ -5,7 +5,8 @@
 Game::Game()
 	: player(InitWindowWidth, InitWindowHeight),
 	  windowWidth{InitWindowWidth},
-	  windowHeight{InitWindowHeight}
+	  windowHeight{InitWindowHeight},
+	  spike{{100.0f, 100.0f}, Direction::West}
 {
 	InitWindow(InitWindowWidth, InitWindowHeight, "Platformer");
 
@@ -104,6 +105,14 @@ void Game::update(float deltaTime) {
 			}
 		}
 	}
+
+	// First check if the player collision rectangle is in the spike triangle.
+	// Probably have to go through all the lines and point in both player collision rectangle and the spike triangle.
+	// This bit is far from finished.
+	if (CheckCollisionPointLine({ playerCollision.x, playerCollision.y }, spike.getPosition(1), spike.getPosition(2), 5))
+	{
+
+	}
 }
 
 void Game::draw() {
@@ -119,6 +128,8 @@ void Game::draw() {
 		for (int i = 0; i < platforms.size(); i++)
 			platforms.at(i).draw();
 	}
+
+	spike.draw();
 
 	EndMode2D();
 	EndDrawing();
@@ -142,6 +153,10 @@ void Game::createPlatforms() {
 	platforms.emplace_back(platform3);
 	Platform platform4({ 40.0f, windowHeight - 440.0f }, 100.0f, 50.0f, RED);
 	platforms.emplace_back(platform4);
+}
+
+void Game::createSpikes() {
+
 }
 
 void Game::checkPlatformCollision(

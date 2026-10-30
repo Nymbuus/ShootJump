@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Platform.h"
+#include "Spike.h"
 #include "Player.h"
 #include "Gun.h"
 #include <vector>
@@ -15,6 +16,8 @@ public:
 private:
 	Player player;
 	Camera2D camera{};
+
+	Spike spike;
 
 	static constexpr int InitWindowWidth = 1920;
 	static constexpr int InitWindowHeight = 1080;
@@ -34,6 +37,7 @@ private:
 
 	void createWalls();
 	void createPlatforms();
+	void createSpikes();
 
 	void checkPlatformCollision(
 		Rectangle playerCollision,
